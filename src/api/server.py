@@ -1,7 +1,7 @@
 from fastapi import FastAPI, exceptions
 from fastapi.responses import JSONResponse
 from pydantic import ValidationError
-from api import jobs
+from src.api import jobs
 import json
 import logging
 from starlette.middleware.cors import CORSMiddleware
