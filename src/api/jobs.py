@@ -26,6 +26,6 @@ class Job(BaseModel):
 @router.get("/fetch", response_model=list[Job])
 def fetch_Jobs():
     with db.engine.begin() as connection:
-        job_list = connection.execute(sqlalchemy.select(db.Jobs)).limit(10).fetchall()
+        job_list = connection.execute(sqlalchemy.select(db.Jobs).limit(10)).fetchall()
     
     return job_list
