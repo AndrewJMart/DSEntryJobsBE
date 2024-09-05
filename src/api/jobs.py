@@ -22,7 +22,7 @@ class Job(BaseModel):
     Day_Posted: str
     Job_Location: str
     Job_Link: str
-    Job_Description_RAW_HTML: str
+    Description_HTML: str
     
 @router.get("/fetch", response_model=list[Job])
 def fetch_Jobs():
