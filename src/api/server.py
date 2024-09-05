@@ -1,7 +1,7 @@
 from fastapi import FastAPI, exceptions
 from fastapi.responses import JSONResponse
 from pydantic import ValidationError
-from src.api import barrels
+from api import jobs
 import json
 import logging
 import sys
@@ -32,7 +32,7 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
-app.include_router(barrels.router)
+app.include_router(jobs.router)
 
 @app.exception_handler(exceptions.RequestValidationError)
 @app.exception_handler(ValidationError)
