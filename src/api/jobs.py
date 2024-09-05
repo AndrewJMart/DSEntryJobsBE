@@ -27,5 +27,8 @@ class Job(BaseModel):
 def fetch_Jobs():
     with db.engine.begin() as connection:
         job_list = connection.execute(sqlalchemy.select(db.Jobs).limit(10)).fetchall()
+        
+    # Convert each row to a dictionary by using _mapping to access keys and values
+    result = [dict(row._mapping) for row in job_list]
     
-    return job_list
+    return result
