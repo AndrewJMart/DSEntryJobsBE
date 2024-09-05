@@ -22,11 +22,12 @@ class Job(BaseModel):
     Day_Posted: str
     Job_Location: str
     Job_Link: str
+    Job_Description_RAW_HTML: str
     
 @router.get("/fetch", response_model=list[Job])
 def fetch_Jobs():
     with db.engine.begin() as connection:
-        job_list = connection.execute(sqlalchemy.select(db.Jobs).limit(10)).fetchall()
+        job_list = connection.execute(sqlalchemy.select(db.Jobs)).fetchall()
         
     # Convert each row to a dictionary by using _mapping to access keys and values
     result = [dict(row._mapping) for row in job_list]
