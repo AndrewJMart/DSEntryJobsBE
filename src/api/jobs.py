@@ -23,6 +23,8 @@ class Job(BaseModel):
     Job_Location: str
     Job_Link: str
     Description_HTML: str
+    Job_Degree: str
+    Job_Experience: str
 
 @router.get("/fetch", response_model=list[Job])
 def fetch_Jobs(    
@@ -33,6 +35,7 @@ def fetch_Jobs(
 
     stmt = (
         sqlalchemy.select(
+            db.Jobs.c.Job_ID,
             db.Jobs.c.Experience_Level,
             db.Jobs.c.Employment_Type,
             db.Jobs.c.Industry,
@@ -65,6 +68,7 @@ def fetch_Jobs(
         for row in result:
             filtered_job_list.append(
             {
+                "Job_ID": row.Job_ID,
                 "Experience_Level": row.Experience_Level,
                 "Employment_Type": row.Employment_Type,
                 "Industry": row.Industry,
