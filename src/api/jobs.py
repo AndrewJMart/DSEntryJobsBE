@@ -25,7 +25,6 @@ class Job(BaseModel):
     Description_HTML: str
 
 @router.get("/fetch", response_model=list[Job])
-
 def fetch_Jobs(    
     job_name: str = "",
     job_experience: str = "",
@@ -52,16 +51,13 @@ def fetch_Jobs(
 
     # filter only if name parameter is passed
     if job_name != "":
-        stmt = stmt.where(db.search_orders_view.c.customer_name.ilike(f"%{job_name}%"))
-        stmt_total_rows = stmt_total_rows.where(db.search_orders_view.c.customer_name.ilike(f"%{job_name}%"))
+        stmt = stmt.where(db.Jobs.c.Title.ilike(f"%{job_name}%"))
     
     if job_experience != "":
-        stmt = stmt.where(db.search_orders_view.c.item_sku.ilike(f"%{job_experience}%"))
-        stmt_total_rows = stmt_total_rows.where(db.search_orders_view.c.item_sku.ilike(f"%{job_experience}%"))
+        stmt = stmt.where(db.Jobs.c.Experience_Level.ilike(f"%{job_experience}%"))
 
     if job_degree != "":
-        stmt = stmt.where(db.search_orders_view.c.item_sku.ilike(f"%{job_degree}%"))
-        stmt_total_rows = stmt_total_rows.where(db.search_orders_view.c.item_sku.ilike(f"%{job_degree}%"))
+        stmt = stmt.where(db.Jobs.c.Job_Degree.ilike(f"%{job_degree}%"))
 
     with db.engine.connect() as conn:
         result = conn.execute(stmt)
