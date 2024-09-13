@@ -19,7 +19,6 @@ class Job(BaseModel):
     Description: str
     Company: str
     Image: str
-    Day_Posted: str
     Job_Location: str
     Job_Link: str
     Description_HTML: str
