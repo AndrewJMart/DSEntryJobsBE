@@ -44,7 +44,6 @@ def fetch_Jobs(
             db.Jobs.c.Description,
             db.Jobs.c.Company,
             db.Jobs.c.Image,
-            db.Jobs.c.Day_Posted,
             db.Jobs.c.Days_Posted,
             db.Jobs.c.Job_Location,
             db.Jobs.c.Job_Link,
