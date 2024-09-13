@@ -25,6 +25,7 @@ class Job(BaseModel):
     Description_HTML: str
     Job_Degree: str
     Job_Experience: str
+    Days_Posted: str
 
 @router.get("/fetch", response_model=list[Job])
 def fetch_Jobs(    
@@ -44,6 +45,7 @@ def fetch_Jobs(
             db.Jobs.c.Company,
             db.Jobs.c.Image,
             db.Jobs.c.Day_Posted,
+            db.Jobs.c.Days_Posted,
             db.Jobs.c.Job_Location,
             db.Jobs.c.Job_Link,
             db.Jobs.c.Description_HTML,
@@ -77,6 +79,7 @@ def fetch_Jobs(
                 "Company": row.Company,
                 "Image": row.Image,
                 "Day_Posted": row.Day_Posted,
+                "Days_Posted": row.Days_Posted,
                 "Job_Location": row.Job_Location,
                 "Job_Link": row.Job_Link,
                 "Description_HTML": row.Description_HTML,
