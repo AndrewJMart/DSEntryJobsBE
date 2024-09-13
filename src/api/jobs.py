@@ -78,7 +78,6 @@ def fetch_Jobs(
                 "Description": row.Description,
                 "Company": row.Company,
                 "Image": row.Image,
-                "Day_Posted": row.Day_Posted,
                 "Days_Posted": row.Days_Posted,
                 "Job_Location": row.Job_Location,
                 "Job_Link": row.Job_Link,
