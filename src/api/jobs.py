@@ -30,7 +30,8 @@ class Job(BaseModel):
 def fetch_Jobs(    
     job_name: str = "",
     job_experience: str = "",
-    job_degree: str = ""
+    job_degree: str = "",
+    job_location: str = ""
     ):
 
     stmt = (
@@ -52,15 +53,17 @@ def fetch_Jobs(
         )
     )
 
-    # filter only if name parameter is passed
     if job_name != "":
         stmt = stmt.where(db.Jobs.c.Title.ilike(f"%{job_name}%"))
     
     if job_experience != "":
-        stmt = stmt.where(db.Jobs.c.Experience_Level.ilike(f"%{job_experience}%"))
+        stmt = stmt.where(db.Jobs.c.Job_Experience <= int(job_experience))
 
     if job_degree != "":
-        stmt = stmt.where(db.Jobs.c.Job_Degree.ilike(f"%{job_degree}%"))
+        stmt = stmt.where(db.Jobs.c.Job_Degree.ilike(f"%{job_degree}% " + "'s"))
+        
+    if job_location != "":
+        stmt = stmt.where(db.Jobs.c.Job_Location.ilike(f"%{job_location}%"))
 
     with db.engine.connect() as conn:
         result = conn.execute(stmt)
