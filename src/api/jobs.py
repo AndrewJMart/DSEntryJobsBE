@@ -25,6 +25,7 @@ class Job(BaseModel):
     Job_Degree: str
     Job_Experience: str
     Days_Posted: str
+    Full_Job_Location: str
 
 @router.get("/fetch", response_model=list[Job])
 def fetch_Jobs(    
@@ -50,6 +51,7 @@ def fetch_Jobs(
             db.Jobs.c.Description_HTML,
             db.Jobs.c.Job_Experience,
             db.Jobs.c.Job_Degree,
+            db.Jobs.c.Full_Job_Location
         )
     )
 
@@ -63,7 +65,7 @@ def fetch_Jobs(
         stmt = stmt.where(db.Jobs.c.Job_Degree.ilike(f"%{job_degree}% " + "'s"))
         
     if job_location != "":
-        stmt = stmt.where(db.Jobs.c.Job_Location.ilike(f"%{job_location}%"))
+        stmt = stmt.where(db.Jobs.c.Full_Job_Location.ilike(f"%{job_location}%"))
 
     with db.engine.connect() as conn:
         result = conn.execute(stmt)
